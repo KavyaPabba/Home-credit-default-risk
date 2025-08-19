@@ -1,47 +1,47 @@
-# Home Credit Default Risk – Fair AI in Finance
+Home Credit Default Risk – Fair AI in Finance
 
-This project explores the [Kaggle Home Credit Default Risk competition](https://www.kaggle.com/competitions/home-credit-default-risk) as a case study in **AI for Finance**, focusing on predictive performance **and** fairness/explainability for regulatory alignment.
+This project uses the Kaggle Home Credit Default Risk competition as a real-world case study to explore how AI models in finance can be both accurate and fair.
+The focus goes beyond prediction performance—we also dig into explainability and fairness auditing, which are increasingly important for building trustworthy financial systems in line with emerging regulations like the EU AI Act.
 
-## 📂 Project Structure
-- `homecredit.ipynb` – Main analysis (data prep, modeling, explainability, fairness)
-- `baseline_model_comparison.csv` – Baseline model metrics
-- `shaplike_global_importance.csv` – Global SHAP feature importance
-- `local_explain_highrisk.csv` – Local SHAP for high-risk cases
-- `local_explain_lowrisk.csv` – Local SHAP for low-risk cases
-- `local_explain_borderline.csv` – Local SHAP for borderline cases
-- `fairness_by_gender.csv` – Fairness metrics by gender
-- `fairness_by_age_group.csv` – Fairness metrics by age group
-- `week3_mitigation_comparison.csv` – Fairness mitigation experiments
-- `Model Performance and Fairness Analysis for Home Credit.docx` – Original draft report
-- `Home_Credit_Final_Report_v2.docx` – Final polished report (this repo)
+What’s Inside
+	•	homecredit.ipynb → main notebook: data prep, modeling, explainability, fairness checks
+	•	baseline_model_comparison.csv → first performance benchmark of Logistic Regression vs LightGBM
+	•	shaplike_global_importance.csv → feature importance ranking (SHAP values)
+	•	local_explain_* → case-level SHAP explanations (high risk, low risk, borderline)
+	•	fairness_by_gender.csv → fairness metrics split by gender
+	•	fairness_by_age_group.csv → fairness metrics split by age groups
+	•	week3_mitigation_comparison.csv → results of fairness mitigation experiments
+	•	Home_Credit_Final_Report_v2.docx → polished write-up combining all findings
 
-## 🚀 Workflow
-1. **Data Preparation** – Merge application/bureau/previous loans; impute missing values; engineer credit utilization, repayment history, ratios.
-2. **Modeling** – Logistic Regression (baseline, interpretable) vs. LightGBM (non-linear). Train/val/test with cross-validation.
-3. **Evaluation** – AUC, accuracy, precision, recall.
-4. **Explainability** – Global SHAP for feature ranking; local SHAP for case-level reasoning.
-5. **Fairness** – Selection rate, TPR (equal opportunity), FPR across gender and age groups.
-6. **Mitigations** – Threshold tuning and re-weighting experiments (`week3_mitigation_comparison.csv`).
+Workflow at a Glance
+	1.	Data Preparation → Combine multiple Home Credit tables (application, bureau, previous loans). Clean and impute missing values. Create new variables (credit utilization, repayment ratios, etc.).
+	2.	Modeling → Compare two approaches: Logistic Regression (simple, interpretable) vs. LightGBM (non-linear, high performance).
+	3.	Evaluation → Measure AUC, accuracy, precision, and recall.
+	4.	Explainability → Use SHAP to see which features matter globally, and to explain individual applicants’ risk scores.
+	5.	Fairness → Audit selection rates, true positive rates, and false positive rates across gender and age groups.
+	6.	Mitigations → Apply re-weighting, threshold adjustment, and post-processing to reduce disparities.
 
-## 📊 Key Results
-- **Best overall**: LightGBM (AUC 0.778; Accuracy 0.757). Logistic Regression close (AUC 0.767; Accuracy 0.707).
-- **Precision challenge**: < 0.20 for both models → many false alarms among predicted defaults.
-- **Top predictors**: External credit scores (EXT_SOURCE_1–3); loan size variables.
-- **Fairness**:
-  - Males and younger applicants flagged more frequently → higher detection but more false positives.
-  - Older applicants flagged less often → more missed defaults.
+Key Takeaways
+	•	Performance → LightGBM was best overall (AUC 0.778, Accuracy 0.757), but Logistic Regression wasn’t far behind.
+	•	Precision problem → Both models had <20% precision, meaning lots of false alarms when predicting default.
+	•	Top predictors → External credit scores (EXT_SOURCE_1–3) and loan amount variables were the strongest signals.
+	•	Fairness →
+	•	Males and younger applicants were flagged more often. This improved detection (higher TPR) but also created more false positives.
+	•	Older applicants were flagged less often, leading to more missed defaults.
 
-## 🏛️ Policy Recommendations (Summary)
-- Mandate **fairness audits** with clear metrics.
-- Standardize **explainability** (e.g., SHAP) for regulators and consumers.
-- Use **fairness-aware modeling** (re-weighting, thresholds, post-processing).
-- Strengthen **data governance** and transparency in **decision thresholds**.
-- Align with **EU AI Act** principles for high-risk AI systems.
+Policy & Practice Recommendations
+	•	Require regular fairness audits with clear, transparent metrics.
+	•	Standardize explainability reports (e.g., SHAP summaries) for both regulators and consumers.
+	•	Explore fairness-aware modeling (re-weighting, constraints, threshold tuning).
+	•	Improve data governance and make credit decision thresholds transparent.
+	•	Align model development with EU AI Act requirements for high-risk financial AI systems.
 
-## 🧪 Reproducibility
-- Open `homecredit.ipynb` in Jupyter/Colab.
-- Ensure Kaggle data is available under the working directory according to competition terms.
-- Run cells sequentially; outputs (CSVs and the final report) will be produced in the working directory.
+How to Reproduce
+	1.	Download Kaggle Home Credit Default Risk data into your working folder.
+	2.	Open homecredit.ipynb in Jupyter/Colab/VS Code.
+	3.	Run the notebook step-by-step.
+	4.	Outputs (CSV files + the final report) will be generated automatically.
 
-## 🎯 Purpose
-This repository is part of a **PhD portfolio project** (AI in Finance), demonstrating end-to-end modeling with fairness and explainability for regulator-ready reporting.
+Why This Matters
+
+This project is part of a PhD portfolio on AI in Finance. The goal is to show how a credit risk model can be developed end-to-end—from raw data, through explainability, to fairness mitigation—so that it’s not only high-performing, but also regulator-ready and socially responsible.
